@@ -1,6 +1,11 @@
 import { useState } from "react";
-import { Button } from "@mui/material";
+import { Card, CardContent, IconButton, Typography } from "@mui/material";
+import Grid from "@mui/material/Grid2";
+
 import Chart from "react-apexcharts";
+import { Alarm, EventNote, Money } from "@mui/icons-material";
+import { BarChart } from "lucide-react";
+import FloatingActionButton from "../components/FloatingActionButton";
 interface Contract {
   id: number;
   client: string;
@@ -32,106 +37,170 @@ function Dashboard() {
     },
   ]);
 
+  const metrics = [
+    {
+      title: "Total de Contratos",
+      value: contracts.length,
+      icon: <EventNote />,
+    },
+    { title: "Contratos Ativos", value: 20, icon: <BarChart /> },
+    { title: "Prox. ao Vencimento", value: 5, icon: <Alarm /> },
+    {
+      title: "Total dos Contratos",
+      value: "R$ 100.000,00",
+      icon: <Money />,
+    },
+  ];
+
   return (
-    <div className="p-6 bg-gray-50 min-h-screen" style={{ color: "black" }}>
-      {/* Cartões de Métricas */}
-      <div className="grid grid-cols-4 gap-4 my-6">
-        <MetricCard title="Total de Contratos" value={contracts.length} />
-        <MetricCard title="Contratos Ativos" value={20} />
-        <MetricCard title="Próximos ao Vencimento" value={5} />
-        <MetricCard title="Valor Total dos Contratos" value={"R$ 100.000,00"} />
-      </div>
-
-      {/* Gráficos */}
-      <div className="grid grid-cols-2 gap-6 my-6">
-        <ChartCard title="Expiração de Contratos">
-          <Chart
-            type="line"
-            width="350"
-            series={[{ name: "Contratos", data: [10, 30, 20, 40, 50] }]}
-            options={{
-              chart: { id: "contract-expiry-chart" },
-              xaxis: { categories: ["Jan", "Feb", "Mar", "Apr", "May"] },
-            }}
-          />
-        </ChartCard>
-
-        <ChartCard title="Distribuição por Status">
-          <Chart
-            type="pie"
-            series={[40, 30, 20, 10]}
-            width="350"
-            options={{
-              labels: ["Ativo", "Expirado", "Renovação", "Consultoria"],
-            }}
-          />
-        </ChartCard>
-      </div>
-
-      {/* Tabela de Contratos */}
-      <div className="my-6 bg-white rounded shadow-md">
-        <h2 className="text-lg font-bold p-4">Tabela de Contratos</h2>
-        <table className="w-full table-auto border-collapse">
-          <thead>
-            <tr className="bg-gray-200 text-left">
-              <th className="p-3">ID</th>
-              <th className="p-3">Cliente</th>
-              <th className="p-3">Data de Início</th>
-              <th className="p-3">Data de Vencimento</th>
-              <th className="p-3">Status</th>
-              <th className="p-3">Valor</th>
-              <th className="p-3">Tipo</th>
-            </tr>
-          </thead>
-          <tbody>
-            {contracts.length > 0 ? (
-              contracts.map((contract) => (
-                <tr key={contract.id} className="border-b">
-                  <td className="p-3">{contract.id}</td>
-                  <td className="p-3">{contract.client}</td>
-                  <td className="p-3">{contract.startDate}</td>
-                  <td className="p-3">{contract.endDate}</td>
-                  <td className="p-3">{contract.status}</td>
-                  <td className="p-3">{contract.value}</td>
-                  <td className="p-3">{contract.type}</td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td className="p-3 text-center" colSpan={7}>
-                  Nenhum contrato cadastrado
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
-
-      {/* Botão de Adicionar Contrato */}
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={() => alert("Abrir formulário")}
+    <>
+      <Grid
+        container
+        style={{
+          color: "black",
+          maxWidth: "100%",
+          overflow: "hidden",
+          margin: "1rem",
+        }}
       >
-        Adicionar Contrato
-      </Button>
-    </div>
+        {/* Cartões de Métricas */}
+        <Grid
+          container
+          spacing={2}
+          className=""
+          size={12}
+          style={{
+            gap: "1rem",
+            justifyContent: "center",
+            marginTop: "1rem",
+            flexFlow: "nowrap",
+          }}
+        >
+          {metrics.map((metric, index) => (
+            <Grid size={{ xs: 12, sm: 6, md: 3 }} key={index}>
+              <Card
+                elevation={0.5}
+                sx={{
+                  transition: "transform 0.2s ease, box-shadow 0.2s ease",
+                  ":hover": {
+                    transform: "translateY(-5px)",
+                    boxShadow: "0px 10px 15px rgba(0, 0, 0, 0.1)",
+                  },
+                }}
+              >
+                <CardContent
+                  sx={{ display: "flex", alignItems: "center", gap: 2 }}
+                >
+                  <IconButton color="primary" size="large">
+                    {metric.icon}
+                  </IconButton>
+                  <div>
+                    <Typography fontWeight="bold" noWrap title={metric.title}>
+                      {metric.title}
+                    </Typography>
+                    <Typography variant="h6" color="primary">
+                      {metric.value}
+                    </Typography>
+                  </div>
+                </CardContent>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+
+        {/* Gráficos */}
+        <Grid container spacing={2} className="my-6" size={{ xs: 12 }}>
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6 }}>
+            <ChartCard title="Distribuição por Status">
+              <Chart
+                type="pie"
+                series={[40, 30, 20, 10]}
+                width="500"
+                options={{
+                  labels: ["Ativo", "Expirado", "Renovação", "Consultoria"],
+                }}
+              />
+            </ChartCard>
+          </Grid>
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6 }}>
+            <ChartCard title="Expiração de Contratos">
+              <Chart
+                type="line"
+                width="640"
+                series={[{ name: "Contratos", data: [10, 30, 20, 40, 50] }]}
+                options={{
+                  chart: { id: "contract-expiry-chart" },
+                  xaxis: { categories: ["Jan", "Feb", "Mar", "Apr", "May"] },
+                }}
+              />
+            </ChartCard>
+          </Grid>
+        </Grid>
+
+        {/* Tabela de Contratos */}
+        <div
+          className="my-6 bg-white rounded shadow-md"
+          style={{
+            backgroundColor: "#fefefe",
+            borderRadius: "1rem",
+            boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.01)",
+          }}
+        >
+          <h2 className="text-lg font-bold p-4">Tabela de Contratos</h2>
+          <table className="w-full table-auto border-collapse">
+            <thead>
+              <tr className="bg-gray-200 text-left">
+                <th className="p-3">ID</th>
+                <th className="p-3">Cliente</th>
+                <th className="p-3">Data de Início</th>
+                <th className="p-3">Data de Vencimento</th>
+                <th className="p-3">Status</th>
+                <th className="p-3">Valor</th>
+                <th className="p-3">Tipo</th>
+              </tr>
+            </thead>
+            <tbody>
+              {contracts.length > 0 ? (
+                contracts.map((contract) => (
+                  <tr key={contract.id} className="border-b">
+                    <td className="p-3">{contract.id}</td>
+                    <td className="p-3">{contract.client}</td>
+                    <td className="p-3">{contract.startDate}</td>
+                    <td className="p-3">{contract.endDate}</td>
+                    <td className="p-3">{contract.status}</td>
+                    <td className="p-3">{contract.value}</td>
+                    <td className="p-3">{contract.type}</td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td className="p-3 text-center" colSpan={7}>
+                    Nenhum contrato cadastrado
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      </Grid>
+      <FloatingActionButton />
+    </>
   );
 }
 
-interface MetricCardProps {
-  title: string;
-  value: number | string;
-}
+// interface MetricCardProps {
+//   title: string;
+//   value: number | string;
+// }
 
-function MetricCard({ title, value }: MetricCardProps) {
-  return (
-    <div className="bg-white p-4 rounded shadow-md">
-      <h3 className="text-lg font-bold text-gray-700">{title}</h3>
-      <p className="text-2xl font-semibold text-blue-600">{value}</p>
-    </div>
-  );
-}
+// function MetricCard({ title, value }: MetricCardProps) {
+//   return (
+//     <div className="bg-white p-4 rounded shadow-md">
+//       <h3 className="text-lg font-bold text-gray-700">{title}</h3>
+//       <p className="text-2xl font-semibold text-blue-600">{value}</p>
+//     </div>
+//   );
+// }
 
 interface ChartCardProps {
   title: string;

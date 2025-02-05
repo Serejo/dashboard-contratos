@@ -21,7 +21,7 @@ function Layout() {
         className={`flex-1 p-4 bg-white ${
           location.pathname !== "/login" ? "ml-64" : ""
         }`}
-        style={{ minHeight: "100vh", overflow: "auto", minWidth: "100vw" }}
+        style={{ minHeight: "100vh", overflow: "auto", minWidth: "85%" }}
       >
         <AppRoutes />
       </main>
