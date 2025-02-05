@@ -9,8 +9,12 @@ function Layout() {
 
   return (
     <div
-      className="flex h-screen "
-      style={{ width: innerWidth, backgroundColor: themeColor }}
+      className=""
+      style={{
+        width: innerWidth,
+        backgroundColor: themeColor,
+        display: "flex",
+      }}
     >
       {location.pathname !== "/login" && <Sidebar />}
       <main
