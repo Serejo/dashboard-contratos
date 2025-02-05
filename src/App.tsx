@@ -4,7 +4,7 @@ import Sidebar from "./components/Sidebar";
 import "./App.css";
 
 function Layout() {
-  const themeColor = "#F6F7FB";
+  const themeColor = "#F0F1F5";
   const location = useLocation();
 
   return (
