@@ -1,7 +1,7 @@
 function Dashboard() {
   return (
     <div className="flex">
-      <h1 className="text-2xl font-bold decoration-[#794BCF]">
+      <h1 className="text-2xl font-bold decoration-[  #794BCF]">
         Bem-vindo ao Dashboard!
       </h1>
     </div>
