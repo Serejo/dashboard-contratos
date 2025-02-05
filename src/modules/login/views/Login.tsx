@@ -77,7 +77,7 @@ const Login = () => {
       }}
     >
       <Grid container justifyContent="space-between" spacing={2}>
-        <Grid size={6}>
+        <Grid size={{ md: 6, xs: 12 }}>
           <img
             src={Illustration}
             alt="Ilustração"
@@ -86,8 +86,16 @@ const Login = () => {
           />
         </Grid>
 
-        <Grid size={6}>
-          <div className="bg-surface rounded-xl mx-6 border border-[#794BCF]-200 p-6">
+        <Grid size={{ md: 6, xs: 12 }}>
+          <div
+            className="bg-surface rounded-xl mx-6"
+            style={{
+              borderRadius: "1rem",
+              boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.01)",
+              padding: "2rem",
+              backgroundColor: "#fefefe",
+            }}
+          >
             <div>
               <Grid container justifyContent="center" className="pb-5">
                 <Grid>
@@ -99,11 +107,8 @@ const Login = () => {
                 </Grid>
               </Grid>
             </div>
-            <div
-              className="py-4"
-              style={{ marginLeft: "15.5rem", marginRight: "15.5rem" }}
-            >
-              <Grid container justifyContent="center" className="my-2 ">
+            <Grid container justifyContent="center">
+              <Grid size={{ xs: 12, sm: 8, md: 6, lg: 4 }}>
                 <TextField
                   className=""
                   label="Usuário"
@@ -119,13 +124,10 @@ const Login = () => {
                   margin="normal"
                 />
               </Grid>
-            </div>
+            </Grid>
 
-            <div
-              className="py-4"
-              style={{ marginLeft: "15.5rem", marginRight: "15.5rem" }}
-            >
-              <Grid container justifyContent="center" className="mt-2">
+            <Grid container justifyContent="center">
+              <Grid size={{ xs: 12, sm: 8, md: 6, lg: 4 }}>
                 <TextField
                   label="Senha"
                   variant="outlined"
@@ -148,7 +150,7 @@ const Login = () => {
                   }}
                 />
               </Grid>
-            </div>
+            </Grid>
 
             <div style={{ marginTop: "1.1rem", marginBottom: "1.1rem" }}>
               <Grid container justifyContent="center" className="mt-10 mb-10">
