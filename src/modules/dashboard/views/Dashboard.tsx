@@ -1,6 +1,6 @@
 function Dashboard() {
   return (
-    <div className="flex">
+    <div className="">
       <h1 className="text-2xl font-bold decoration-[  #794BCF]">
         Bem-vindo ao Dashboard!
       </h1>
