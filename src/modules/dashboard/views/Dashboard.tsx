@@ -10,14 +10,15 @@ import MetricsChart from "../components/MetricsChart";
 import ExpirationContractsChart from "../components/ExpirationContractsChart";
 import { Metric } from "../interfaces/Metric";
 import MetricCards from "../components/MetricCards";
+import { formatDate } from "../../../shared/helpers/masks";
 
 function Dashboard() {
   const [contracts] = useState<Contract[]>([
     {
       id: 1,
       client: "Empresa Alpha",
-      startDate: "2025-01-01",
-      endDate: "2025-12-31",
+      startDate: formatDate("2025-01-01"),
+      endDate: formatDate("2025-12-31"),
       status: "Ativo",
       value: 50000,
       type: "Serviço",
@@ -25,8 +26,8 @@ function Dashboard() {
     {
       id: 2,
       client: "Empresa Beta",
-      startDate: "2024-03-15",
-      endDate: "2025-03-15",
+      startDate: formatDate("2025-02-01"),
+      endDate: formatDate("2025-03-15"),
       status: "Pendente Renovação",
       value: 30000,
       type: "Consultoria",
