@@ -18,7 +18,6 @@ function Dashboard() {
       try {
         const data = await ContractService.fetchContracts();
         data.forEach((contract) => contractStore.addContract(contract));
-        console.log(contractStore.contracts);
       } catch (error) {
         console.error("Erro ao carregar contratos:", error);
       }
