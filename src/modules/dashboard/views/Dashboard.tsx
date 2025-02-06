@@ -11,6 +11,7 @@ import ExpirationContractsChart from "../components/ExpirationContractsChart";
 import { Metric } from "../interfaces/Metric";
 import MetricCards from "../components/MetricCards";
 import { formatDate } from "../../../shared/helpers/masks";
+import FloatingActionFilter from "../components/FloatingActionFilter";
 
 function Dashboard() {
   const [contracts] = useState<Contract[]>([
@@ -62,7 +63,13 @@ function Dashboard() {
       >
         <MetricCards metrics={metrics} />
 
-        <Grid container spacing={2} className="my-6" size={{ xs: 12 }}>
+        <Grid
+          container
+          spacing={2}
+          className="my-7"
+          size={{ xs: 12 }}
+          style={{ marginBottom: "1rem" }}
+        >
           <MetricsChart />
           <ExpirationContractsChart />
         </Grid>
@@ -70,6 +77,7 @@ function Dashboard() {
         <ContractGrid contracts={contracts} />
       </Grid>
       <FloatingActionButton />
+      <FloatingActionFilter />
     </>
   );
 }
