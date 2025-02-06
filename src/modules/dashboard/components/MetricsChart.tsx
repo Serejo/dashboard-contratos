@@ -8,10 +8,10 @@ function MetricsChart() {
       <ChartCard title="Distribuição por Status">
         <Chart
           type="pie"
-          series={[40, 30, 20, 10]}
+          series={[40, 30, 20]}
           width="500"
           options={{
-            labels: ["Ativo", "Expirado", "Renovação", "Consultoria"],
+            labels: ["Ativo", "Expirado", "Renovação"],
           }}
         />
       </ChartCard>
