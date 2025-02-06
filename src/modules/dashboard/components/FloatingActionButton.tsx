@@ -9,8 +9,8 @@ function FloatingActionButton() {
         onClick={() => alert("Abrir formulário")}
         sx={{
           position: "fixed",
-          top: 16,
-          right: 16,
+          bottom: 16,
+          right: 30,
           zIndex: 1000,
         }}
       >
