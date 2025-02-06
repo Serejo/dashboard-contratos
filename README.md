@@ -1,50 +1,62 @@
-# React + TypeScript + Vite
+# Dashboard Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este projeto tem como objetivo exibir uma visão consolidada de contratos, com informações úteis, gráficos e listagens para facilitar o gerenciamento.
 
-Currently, two official plugins are available:
+## 🚀 Funcionalidades Implementadas
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Cards de Métricas:** Exibição de dados resumidos sobre os contratos.
+- **Tabela de Contratos:** Lista detalhada com informações relevantes sobre cada contrato, incluindo busca e paginação.
+- **Gráficos:** Visualização das métricas e vencimentos de contratos.
+- **Ações Flutuantes:** Filtros e botões de ação rápida para maior usabilidade.
 
-## Expanding the ESLint configuration
+## 🛠️ Instruções para Instalação, Execução e Teste
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### **Instalação**
 
-- Configure the top-level `parserOptions` property like this:
+Certifique-se de ter o Node.js instalado. Para instalar as dependências:
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```bash
+npm install
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### **Execução do Projeto**
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+npm run dev
 ```
+
+O aplicativo estará disponível em [http://localhost:3000](http://localhost:3000).
+
+Os testes serão executados com relatórios no console.
+
+## 🧰 Justificativas das Decisões de Arquitetura
+
+- **Arquitetura de Componentes:** Seguindo o padrão Atomic Design para uma estrutura organizada e escalável.
+- **State Management:** Uso de `contractStore` para centralizar o gerenciamento dos contratos usando Mobx.
+- **Material UI e Lucide:** Escolha para uma interface moderna e responsiva, com ícones legíveis.
+- **Organização Modular:** Separacão clara entre componentes, serviços e interfaces para manutenção simplificada.
+
+## 📚 Desafios Enfrentados e Soluções Aplicadas
+
+- **Carregamento de Dados na Tabela:**
+
+  - **Problema:** Os dados não eram exibidos na `DataGrid`.
+  - **Solução:** Ajustei o mapeamento dos contratos para garantir IDs únicos.
+
+- **Gestão de Contratos no Store:**
+
+  - **Problema:** Dificuldade em sincronizar o estado com a interface.
+  - **Solução:** Adotei um padrão reativo com mapeamento direto das respostas da API.
+
+- **Design das Métricas:**
+  - **Problema:** As métricas precisavam ser calculadas com filtros dinâmicos.
+  - **Solução:** Implementei funções específicas para filtrar e exibir informações de vencimento e status.
+
+## 🤖 Uso de IA no Desenvolvimento
+
+- **Correção de Problemas:** Com auxílio de IA, identifiquei soluções para falhas no carregamento de dados.
+- **Melhorias em Componentes:** Sugestões para ajustar o código a boas práticas de desenvolvimento.
+
+## 📧 Dúvidas ou Sugestões
+
+Caso tenha alguma dúvida ou sugestão, fique à vontade para entrar em contato!
