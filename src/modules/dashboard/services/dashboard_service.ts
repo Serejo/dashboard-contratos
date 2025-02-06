@@ -3,14 +3,85 @@ import { Contract } from "../interfaces/Contract";
 const API_URL = "http://localhost:5000/contracts";
 // Criar uma classe de Repository para abstrair a comunicação com a API
 
+/*
+ {
+      id: 1,
+      client: "Empresa Alpha",
+      startDate: "2025-01-01",
+      endDate: "2025-12-31",
+      status: "Ativo",
+      value: 50000,
+      type: "Serviço",
+    },
+    {
+      id: 2,
+      client: "Empresa Beta",
+      startDate: "2025-02-01",
+      endDate: "2025-03-15",
+      status: "Pendente Renovação",
+      value: 30000,
+      type: "Consultoria",
+    },
+*/
+
 class DashboardService {
   static async fetchContracts(): Promise<Contract[]> {
     try {
-      const response = await fetch(API_URL);
+      //   const response = await fetch();
+      const response = { ok: true };
       if (!response.ok) {
         throw new Error("Erro ao buscar contratos");
       }
-      const data: Contract[] = await response.json();
+      //Simulando a resposta da API
+      //   const data: Contract[] = await response.json();
+      const data = [
+        {
+          id: 1,
+          client: "Empresa Alpha",
+          startDate: "2025-01-01",
+          endDate: "2025-12-31",
+          status: "Ativo",
+          value: 50000,
+          type: "Serviço",
+        },
+        {
+          id: 2,
+          client: "Empresa Beta",
+          startDate: "2025-02-01",
+          endDate: "2025-03-15",
+          status: "Pendente Renovação",
+          value: 30000,
+          type: "Consultoria",
+        },
+        {
+          id: 3,
+          client: "Empresa Gama",
+          startDate: "2025-02-01",
+          endDate: "2025-03-15",
+          status: "Pendente Renovação",
+          value: 30000,
+          type: "Consultoria",
+        },
+        {
+          id: 4,
+          client: "Empresa Delta",
+          startDate: "2025-02-01",
+          endDate: "2025-03-15",
+          status: "Pendente Renovação",
+          value: 30000,
+          type: "Consultoria",
+        },
+        {
+          id: 5,
+          client: "Empresa Epsilon",
+          startDate: "2025-02-01",
+          endDate: "2025-03-15",
+          status: "Pendente Renovação",
+          value: 30000,
+          type: "Consultoria",
+        },
+      ];
+
       return data;
     } catch (error) {
       console.error(error);
