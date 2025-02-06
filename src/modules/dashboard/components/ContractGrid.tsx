@@ -6,7 +6,6 @@ import {
   TextField,
   InputAdornment,
 } from "@mui/material";
-import { Info as InfoIcon } from "@mui/icons-material";
 import { Contract } from "../interfaces/Contract";
 import {
   DataGrid,
@@ -38,11 +37,7 @@ function ContractGrid({ contracts }: { contracts: Contract[] }) {
       flex: 1,
       renderCell: (params: GridRenderCellParams<GridValidRowModel>) => (
         <Tooltip title={`Status: ${params.value}`} arrow>
-          <Chip
-            label={params.value}
-            color={getStatusColor(params.value)}
-            icon={<InfoIcon />}
-          />
+          <Chip label={params.value} color={getStatusColor(params.value)} />
         </Tooltip>
       ),
     },
@@ -65,7 +60,7 @@ function ContractGrid({ contracts }: { contracts: Contract[] }) {
           Tabela de Contratos
         </Typography>
       </Grid>
-      <Grid item xs={3}>
+      <Grid item xs={3} style={{ paddingRight: "1rem" }}>
         <TextField
           fullWidth
           placeholder="Buscar contratos"
