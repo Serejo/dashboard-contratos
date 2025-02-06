@@ -2,6 +2,10 @@
 
 Este projeto tem como objetivo exibir uma visão consolidada de contratos, com informações úteis, gráficos e listagens para facilitar o gerenciamento.
 
+
+![image](https://github.com/user-attachments/assets/4baffe14-68bb-40fc-9fed-6227b265080d)
+
+
 ## 🚀 Funcionalidades Implementadas
 
 - **Cards de Métricas:** Exibição de dados resumidos sobre os contratos.
