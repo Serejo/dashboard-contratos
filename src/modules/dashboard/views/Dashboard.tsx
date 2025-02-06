@@ -6,15 +6,9 @@ import Chart from "react-apexcharts";
 import { Alarm, EventNote, Money } from "@mui/icons-material";
 import { BarChart } from "lucide-react";
 import FloatingActionButton from "../components/FloatingActionButton";
-interface Contract {
-  id: number;
-  client: string;
-  startDate: string;
-  endDate: string;
-  status: string;
-  value: number;
-  type: string;
-}
+import { Contract } from "../interfaces/Contract";
+import ContractGrid from "../components/ContractGrid";
+
 function Dashboard() {
   const [contracts] = useState<Contract[]>([
     {
@@ -137,70 +131,12 @@ function Dashboard() {
           </Grid>
         </Grid>
 
-        {/* Tabela de Contratos */}
-        <div
-          className="my-6 bg-white rounded shadow-md"
-          style={{
-            backgroundColor: "#fefefe",
-            borderRadius: "1rem",
-            boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.01)",
-          }}
-        >
-          <h2 className="text-lg font-bold p-4">Tabela de Contratos</h2>
-          <table className="w-full table-auto border-collapse">
-            <thead>
-              <tr className="bg-gray-200 text-left">
-                <th className="p-3">ID</th>
-                <th className="p-3">Cliente</th>
-                <th className="p-3">Data de Início</th>
-                <th className="p-3">Data de Vencimento</th>
-                <th className="p-3">Status</th>
-                <th className="p-3">Valor</th>
-                <th className="p-3">Tipo</th>
-              </tr>
-            </thead>
-            <tbody>
-              {contracts.length > 0 ? (
-                contracts.map((contract) => (
-                  <tr key={contract.id} className="border-b">
-                    <td className="p-3">{contract.id}</td>
-                    <td className="p-3">{contract.client}</td>
-                    <td className="p-3">{contract.startDate}</td>
-                    <td className="p-3">{contract.endDate}</td>
-                    <td className="p-3">{contract.status}</td>
-                    <td className="p-3">{contract.value}</td>
-                    <td className="p-3">{contract.type}</td>
-                  </tr>
-                ))
-              ) : (
-                <tr>
-                  <td className="p-3 text-center" colSpan={7}>
-                    Nenhum contrato cadastrado
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
+        <ContractGrid contracts={contracts} />
       </Grid>
       <FloatingActionButton />
     </>
   );
 }
-
-// interface MetricCardProps {
-//   title: string;
-//   value: number | string;
-// }
-
-// function MetricCard({ title, value }: MetricCardProps) {
-//   return (
-//     <div className="bg-white p-4 rounded shadow-md">
-//       <h3 className="text-lg font-bold text-gray-700">{title}</h3>
-//       <p className="text-2xl font-semibold text-blue-600">{value}</p>
-//     </div>
-//   );
-// }
 
 interface ChartCardProps {
   title: string;
