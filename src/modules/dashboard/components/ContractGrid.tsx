@@ -1,8 +1,46 @@
 import { Tooltip, Grid, Typography, Chip } from "@mui/material";
 import { Info as InfoIcon } from "@mui/icons-material";
 import { Contract } from "../interfaces/Contract";
+import {
+  DataGrid,
+  GridColDef,
+  GridRenderCellParams,
+  GridValidRowModel,
+} from "@mui/x-data-grid";
 
 function ContractGrid({ contracts }: { contracts: Contract[] }) {
+  const columns: GridColDef[] = [
+    { field: "id", headerName: "ID", width: 90 },
+    { field: "client", headerName: "Cliente", flex: 1 },
+    {
+      field: "startDate",
+      headerName: "Data de Início",
+      flex: 1,
+      valueFormatter: ({ value }) => value,
+    },
+    {
+      field: "endDate",
+      headerName: "Data de Vencimento",
+      flex: 1,
+      valueFormatter: ({ value }) => value,
+    },
+    {
+      field: "status",
+      headerName: "Status",
+      flex: 1,
+      renderCell: (params: GridRenderCellParams<GridValidRowModel>) => (
+        <Tooltip title={`Status: ${params.value}`} arrow>
+          <Chip
+            label={params.value}
+            color={getStatusColor(params.value)}
+            icon={<InfoIcon />}
+          />
+        </Tooltip>
+      ),
+    },
+    { field: "value", headerName: "Valor", flex: 1 },
+    { field: "type", headerName: "Tipo", flex: 1 },
+  ];
   return (
     <Grid
       container
@@ -20,66 +58,14 @@ function ContractGrid({ contracts }: { contracts: Contract[] }) {
         </Typography>
       </Grid>
 
-      {/* Cabeçalho */}
-      <Grid container item xs={12} spacing={2} sx={{ fontWeight: "bold" }}>
-        <Grid item xs={2}>
-          <Typography>ID</Typography>
-        </Grid>
-        <Grid item xs={2}>
-          <Typography>Cliente</Typography>
-        </Grid>
-        <Grid item xs={2}>
-          <Typography>Data de Início</Typography>
-        </Grid>
-        <Grid item xs={2}>
-          <Typography>Data de Vencimento</Typography>
-        </Grid>
-        <Grid item xs={2}>
-          <Typography>Status</Typography>
-        </Grid>
-        <Grid item xs={2}>
-          <Typography>Valor</Typography>
-        </Grid>
-      </Grid>
-
-      {/* Dados */}
-      {contracts.length > 0 ? (
-        contracts.map((contract) => (
-          <Grid container item xs={12} spacing={2} key={contract.id}>
-            <Grid item xs={2}>
-              <Typography>{contract.id}</Typography>
-            </Grid>
-            <Grid item xs={2}>
-              <Typography>{contract.client}</Typography>
-            </Grid>
-            <Grid item xs={2}>
-              <Typography>{contract.startDate}</Typography>
-            </Grid>
-            <Grid item xs={2}>
-              <Typography>{contract.endDate}</Typography>
-            </Grid>
-            <Grid item xs={2}>
-              {/* Tooltip para status */}
-              <Tooltip title={`Status: ${contract.status}`} arrow>
-                <Chip
-                  label={contract.status}
-                  color={getStatusColor(contract.status)}
-                  icon={<InfoIcon />}
-                />
-              </Tooltip>
-            </Grid>
-            <Grid item xs={2}>
-              <Typography>{contract.value}</Typography>
-            </Grid>
-          </Grid>
-        ))
-      ) : (
-        <Grid item xs={12}>
-          <Typography textAlign="center" color="gray">
-            Nenhum contrato cadastrado
-          </Typography>
-        </Grid>
-      )}
+      <DataGrid
+        rows={contracts}
+        columns={columns}
+        sx={{
+          boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.01)",
+          borderRadius: "1rem",
+        }}
+      />
     </Grid>
   );
 }
