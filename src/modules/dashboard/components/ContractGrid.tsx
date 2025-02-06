@@ -1,4 +1,11 @@
-import { Tooltip, Grid, Typography, Chip } from "@mui/material";
+import {
+  Tooltip,
+  Grid,
+  Typography,
+  Chip,
+  TextField,
+  InputAdornment,
+} from "@mui/material";
 import { Info as InfoIcon } from "@mui/icons-material";
 import { Contract } from "../interfaces/Contract";
 import {
@@ -7,6 +14,7 @@ import {
   GridRenderCellParams,
   GridValidRowModel,
 } from "@mui/x-data-grid";
+import { SearchIcon } from "lucide-react";
 
 function ContractGrid({ contracts }: { contracts: Contract[] }) {
   const columns: GridColDef[] = [
@@ -52,15 +60,36 @@ function ContractGrid({ contracts }: { contracts: Contract[] }) {
         padding: "1rem",
       }}
     >
-      <Grid item xs={12}>
+      <Grid item xs={9}>
         <Typography variant="h6" fontWeight="bold">
           Tabela de Contratos
         </Typography>
       </Grid>
+      <Grid item xs={3}>
+        <TextField
+          fullWidth
+          placeholder="Buscar contratos"
+          variant="outlined"
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchIcon />
+              </InputAdornment>
+            ),
+          }}
+        />
+      </Grid>
 
       <DataGrid
+        style={{ margin: "1rem" }}
         rows={contracts}
         columns={columns}
+        initialState={{
+          pagination: {
+            paginationModel: { pageSize: 5 },
+          },
+        }}
+        pageSizeOptions={[5, 10, 20]}
         sx={{
           boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.01)",
           borderRadius: "1rem",

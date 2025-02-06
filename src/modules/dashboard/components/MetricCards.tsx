@@ -19,7 +19,7 @@ function MetricCards({ metrics }: { metrics: Metric[] }) {
       {metrics.map((metric, index) => (
         <Grid size={{ xs: 12, sm: 6, md: 3 }} key={index}>
           <Card
-            elevation={0.5}
+            elevation={1}
             sx={{
               transition: "transform 0.2s ease, box-shadow 0.2s ease",
               ":hover": {
