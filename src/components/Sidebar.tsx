@@ -43,7 +43,9 @@ function SideBarMenu() {
           },
         }}
       >
-        <MenuItem icon={<Home />}>Dashboard</MenuItem>
+        <MenuItem onClick={() => navigate("/dashboard")} icon={<Home />}>
+          Dashboard
+        </MenuItem>
         <MenuItem icon={<FileText />}>Documentation</MenuItem>
         <MenuItem icon={<Calendar />}>Calendar</MenuItem>
         <MenuItem onClick={() => navigate("/login")} icon={<ArrowBigLeft />}>
