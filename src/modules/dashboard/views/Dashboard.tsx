@@ -1,44 +1,21 @@
-import { useState } from "react";
 import Grid from "@mui/material/Grid2";
 
 import { Alarm, EventNote, Money } from "@mui/icons-material";
 import { BarChart } from "lucide-react";
 import FloatingActionButton from "../components/FloatingActionButton";
-import { Contract } from "../interfaces/Contract";
 import ContractGrid from "../components/ContractGrid";
 import MetricsChart from "../components/MetricsChart";
 import ExpirationContractsChart from "../components/ExpirationContractsChart";
 import { Metric } from "../interfaces/Metric";
 import MetricCards from "../components/MetricCards";
-import { formatDate } from "../../../shared/helpers/masks";
 import FloatingActionFilter from "../components/FloatingActionFilter";
+import { contractStore } from "../store";
 
 function Dashboard() {
-  const [contracts] = useState<Contract[]>([
-    {
-      id: 1,
-      client: "Empresa Alpha",
-      startDate: formatDate("2025-01-01"),
-      endDate: formatDate("2025-12-31"),
-      status: "Ativo",
-      value: 50000,
-      type: "Serviço",
-    },
-    {
-      id: 2,
-      client: "Empresa Beta",
-      startDate: formatDate("2025-02-01"),
-      endDate: formatDate("2025-03-15"),
-      status: "Pendente Renovação",
-      value: 30000,
-      type: "Consultoria",
-    },
-  ]);
-
   const metrics: Metric[] = [
     {
       title: "Total de Contratos",
-      value: contracts.length,
+      value: contractStore.contracts.length,
       icon: <EventNote />,
     },
     { title: "Contratos Ativos", value: 20, icon: <BarChart /> },
@@ -74,7 +51,7 @@ function Dashboard() {
           <ExpirationContractsChart />
         </Grid>
 
-        <ContractGrid contracts={contracts} />
+        <ContractGrid contracts={contractStore.contracts} />
       </Grid>
       <FloatingActionButton />
       <FloatingActionFilter />
